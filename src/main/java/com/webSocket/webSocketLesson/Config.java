@@ -1,5 +1,7 @@
 package com.webSocket.webSocketLesson;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -9,14 +11,19 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocketMessageBroker
 public class Config implements WebSocketMessageBrokerConfigurer {
+    private static  final Logger logger = LoggerFactory.getLogger(Config.class);
+
     @Override
     public  void configureMessageBroker(MessageBrokerRegistry registry) {
+        logger.info("at message broker method");
         registry.enableSimpleBroker("/topic", "/queue");
         registry.setApplicationDestinationPrefixes("/app");
+        logger.info("message broker passed");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+        logger.info("at stomPoint method");
         registry.addEndpoint("/ws")
                 .setAllowedOrigins("http://localhost:5174")
                 .withSockJS();
