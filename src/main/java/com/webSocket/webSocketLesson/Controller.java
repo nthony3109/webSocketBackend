@@ -19,7 +19,7 @@ public class Controller {
 
     @PostMapping("/sendNotification")
     public void sendNotification(@RequestBody NotificatiionInfo info) {
-        log.info("data received", info);
+        log.info("data received : {}", info);
         System.out.println(info);
         logicClass.sendNotification(info);
     }
